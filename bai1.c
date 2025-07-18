@@ -110,7 +110,7 @@ void deleteActivities(Node** head) {
             }
         }
 
-        current->next = previous->next;
+        previous->next = current->next;
         free(previous);
     return;
     }
@@ -129,7 +129,7 @@ void updateActivity(Node** head) {
         free(current);
         return;
     }
-    while (current->data.id != updateID || current->next != NULL) {
+    while (current->data.id != updateID && current->next != NULL) {
         current = current->next;
         if (current->next == NULL && current->data.id != updateID) {
             printf("Khong tim thay id de update");
@@ -150,7 +150,7 @@ void updateActivity(Node** head) {
     printf("Nhap thoi luong moi: ");
     scanf("%d", &current->data.duration);
     printf("Nhap calories moi: ");
-    scanf("%f", &current->data.calories);
+    scanf("%d", &current->data.calories);
     printf("Cap nhat thanh cong \n");
 }
 
@@ -195,10 +195,13 @@ int main() {
                 break;
             case 3:
                 deleteActivities(&ActivitiesList);
+                break;
             case 6:
                 updateActivity(&ActivitiesList);
+                break;
             case 7:
                 searchActivities(ActivitiesList);
+                break;
             case 8:
                 break;
             default:
